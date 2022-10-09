@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
         <TextBox x:Name="textBox" Margin="10" Height="50" VerticalAlignment="Top" Text="{Binding Text}"/>
-        <Button Content="Translate" Height="30" Command="{Binding buttonCommand}" CommandParameter="{Binding ElementName=textBox, Path=Text}"/>
-        <InkCanvas x:Name="inkCanvas" Height="100" Width="300">
+        <Button Content="Translate"  Command="{Binding buttonCommand}" CommandParameter="{Binding ElementName=textBox, Path=Text}"/>
+        <InkCanvas x:Name="inkCanvas" Height="100">
             
         </InkCanvas>
         <Button Content="vision" Command="{Binding visionCommand}" CommandParameter="{Binding ElementName=inkCanvas}"/>

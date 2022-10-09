@@ -37,25 +37,9 @@ namespace AzureTest.Command
 
             string subscriptionKey = "025515d379ce475fa68770e33aa637b9";
             string endpoint = "https://cooc-vision.cognitiveservices.azure.com/";
-
-
-            InkCanvas inkCanvas = new InkCanvas();
-            inkCanvas = parameter as InkCanvas;
-
-            //render bitmap
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)inkCanvas.ActualWidth, (int)inkCanvas.ActualHeight, 96, 96, System.Windows.Media.PixelFormats.Default);
+            string file = @"F:\github\test.png";
+            CreateBitmapFromVisual(parameter as Visual, file);
             
-            rtb.Render(inkCanvas);
-            BitmapFrame t = MergeInk(inkCanvas.Strokes, rtb);
-            string file = @"F:\github\test.jpg";
-            using (FileStream fs = new FileStream(file, FileMode.Create))
-            {
-                BitmapEncoder encoder = new JpegBitmapEncoder();
-
-                encoder.Frames.Add(t);
-
-                encoder.Save(fs);
-            }
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);
 
             await ReadFileUrl(client, File.OpenRead(file));
@@ -115,38 +99,29 @@ namespace AzureTest.Command
             }
             Console.WriteLine();
         }
-        public static BitmapFrame MergeInk(StrokeCollection ink, BitmapSource background)
+        
 
+        public void CreateBitmapFromVisual(Visual target, string fileName)
         {
-
-            DrawingVisual drawingVisual = new DrawingVisual();
-
-            using (DrawingContext drawingContext = drawingVisual.RenderOpen())
-
+            if (target == null || string.IsNullOrEmpty(fileName)) return;
+            Rect bounds = VisualTreeHelper.GetDescendantBounds(target);
+            RenderTargetBitmap renderTarget = new RenderTargetBitmap((Int32) bounds.Width,
+                (Int32) bounds.Height, 96, 96, PixelFormats.Pbgra32);
+            DrawingVisual visual = new DrawingVisual();
+            using (DrawingContext context = visual.RenderOpen())
             {
-
-                drawingContext.DrawImage(background, new Rect(0, 0, background.Width, background.Height));
-
-                foreach (var item in ink)
-
-                {
-
-                    item.Draw(drawingContext);
-
-                }
-
-                drawingContext.Close();
-
-                var bitmap = new RenderTargetBitmap((int)background.Width, (int)background.Height, background.DpiX, background.DpiY, PixelFormats.Pbgra32);
-
-                bitmap.Render(drawingVisual);
-
-                return BitmapFrame.Create(bitmap);
-
+                VisualBrush visualBrush = new VisualBrush(target);
+                context.DrawRectangle(visualBrush, null, new Rect(new System.Windows.Point(), bounds.Size));
+            }
+            renderTarget.Render(visual);
+            PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
+            bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTarget));
+            using (Stream stm = File.Create(fileName))
+            {
+                bitmapEncoder.Save(stm);
             }
 
         }
-
     }
 
 }
