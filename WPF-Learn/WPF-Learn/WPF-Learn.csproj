@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net3.1-windows</TargetFramework>
     <RootNamespace>WPF_Learn</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>

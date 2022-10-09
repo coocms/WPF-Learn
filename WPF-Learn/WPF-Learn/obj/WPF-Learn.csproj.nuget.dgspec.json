@@ -1,32 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cooc\\Desktop\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj": {}
+    "F:\\github\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cooc\\Desktop\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj": {
+    "F:\\github\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cooc\\Desktop\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj",
+        "projectUniqueName": "F:\\github\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj",
         "projectName": "WPF-Learn",
-        "projectPath": "C:\\Users\\cooc\\Desktop\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj",
-        "packagesPath": "C:\\Users\\cooc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cooc\\Desktop\\WPF-Learn\\WPF-Learn\\WPF-Learn\\obj\\",
+        "projectPath": "F:\\github\\WPF-Learn\\WPF-Learn\\WPF-Learn\\WPF-Learn.csproj",
+        "packagesPath": "C:\\Users\\jiajunchen\\.nuget\\packages\\",
+        "outputPath": "F:\\github\\WPF-Learn\\WPF-Learn\\WPF-Learn\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\cooc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jiajunchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net31"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net31": {
+            "targetAlias": "net3.1-windows",
             "projectReferences": {}
           }
         },
@@ -37,28 +40,14 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WPF": {
-              "privateAssets": "none"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "net31": {
+          "targetAlias": "net3.1-windows",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
         }
       }
     }
