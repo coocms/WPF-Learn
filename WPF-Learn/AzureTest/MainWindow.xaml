@@ -9,7 +9,12 @@
     <StackPanel>
         <TextBox x:Name="textBox" Margin="10" Height="50" VerticalAlignment="Top" Text="{Binding Text}"/>
         <Button Content="Translate"  Command="{Binding buttonCommand}" CommandParameter="{Binding ElementName=textBox, Path=Text}"/>
-        <InkCanvas x:Name="inkCanvas" Height="100">
+        <InkCanvas x:Name="inkCanvas" EditingMode="Ink" >
+            <InkCanvas.DefaultDrawingAttributes>
+                <DrawingAttributes Color="Red" FitToCurve="True">
+                    
+                </DrawingAttributes>
+            </InkCanvas.DefaultDrawingAttributes>
             
         </InkCanvas>
         <Button Content="vision" Command="{Binding visionCommand}" CommandParameter="{Binding ElementName=inkCanvas}"/>

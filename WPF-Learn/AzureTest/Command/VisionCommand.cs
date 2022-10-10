@@ -37,7 +37,7 @@ namespace AzureTest.Command
 
             string subscriptionKey = "025515d379ce475fa68770e33aa637b9";
             string endpoint = "https://cooc-vision.cognitiveservices.azure.com/";
-            string file = @"F:\github\test.png";
+            string file = @"F:\test.png";
             CreateBitmapFromVisual(parameter as Visual, file);
             
             ComputerVisionClient client = Authenticate(endpoint, subscriptionKey);

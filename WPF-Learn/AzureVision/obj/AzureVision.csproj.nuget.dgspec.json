@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj": {}
+    "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj": {}
   },
   "projects": {
-    "F:\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj": {
+    "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj",
+        "projectUniqueName": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj",
         "projectName": "AzureVision",
-        "projectPath": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj",
-        "packagesPath": "C:\\Users\\jiajunchen\\.nuget\\packages\\",
-        "outputPath": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\obj\\",
+        "projectPath": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\AzureVision.csproj",
+        "packagesPath": "C:\\Users\\coocms\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureVision\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jiajunchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\coocms\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,6 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://aka.ms/maui-preview/index.json": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,12 +61,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.25, 3.1.25]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

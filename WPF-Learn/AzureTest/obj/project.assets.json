@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
+    "net6.0-windows7.0": {
       "Microsoft.Azure.CognitiveServices.Vision.ComputerVision/7.0.1": {
         "type": "package",
         "dependencies": {
@@ -4558,41 +4558,44 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": [
+    "net6.0-windows7.0": [
       "Microsoft.Azure.CognitiveServices.Vision.ComputerVision >= 7.0.1",
       "Newtonsoft.Json >= 13.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jiajunchen\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\coocms\\.nuget\\packages\\": {},
+    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\AzureTest.csproj",
+      "projectUniqueName": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\AzureTest.csproj",
       "projectName": "AzureTest",
-      "projectPath": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\AzureTest.csproj",
-      "packagesPath": "C:\\Users\\jiajunchen\\.nuget\\packages\\",
-      "outputPath": "F:\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\obj\\",
+      "projectPath": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\AzureTest.csproj",
+      "packagesPath": "C:\\Users\\coocms\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\coocms\\Desktop\\github\\WPF-Learn\\WPF-Learn\\AzureTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\jiajunchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\coocms\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.1"
+        "net6.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://aka.ms/maui-preview/index.json": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
           "projectReferences": {}
         }
       },
@@ -4603,8 +4606,8 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
         "dependencies": {
           "Microsoft.Azure.CognitiveServices.Vision.ComputerVision": {
             "target": "Package",
@@ -4633,7 +4636,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

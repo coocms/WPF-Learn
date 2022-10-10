@@ -3,43 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_Learn"
+        xmlns:local="clr-namespace:WPF_Learn" xmlns:local1="clr-namespace:WPF_Learn.SelfPanel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            
-        </Grid.RowDefinitions>
-
-
-
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            
-            <Border Background="Orange"/>
-            <Border Background="Green" Grid.Column="1"/>
-            <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="5" Background="Gray"/>
-        </Grid>
-
-        <Grid Grid.Row="1" Height="30" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition />
-                
-            </Grid.ColumnDefinitions>
-            <Border Background="Orange"/>
-            <Border Background="Green" Grid.Column="1"/>
-        </Grid>
-
-
-
-
+        <local1:SelfStackPanel>
+            <Button Content="Button1" local1:SelfStackPanel.Index="3"/>
+            <Button Content="Button2" local1:SelfStackPanel.Index="2"/>
+            <Button Content="Button3" local1:SelfStackPanel.Index="1"/>
+        </local1:SelfStackPanel>
+        
     </Grid>
+
 </Window>

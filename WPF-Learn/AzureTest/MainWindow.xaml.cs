@@ -26,8 +26,8 @@ namespace AzureTest
         public MainWindow()
         {
             InitializeComponent();
-            drawingAttributes.FitToCurve = true;
-            inkCanvas.DefaultDrawingAttributes = drawingAttributes;
+            //drawingAttributes.FitToCurve = true;
+            //inkCanvas.DefaultDrawingAttributes = drawingAttributes;
             
             this.DataContext = new ViewModel(inkCanvas);
         }
