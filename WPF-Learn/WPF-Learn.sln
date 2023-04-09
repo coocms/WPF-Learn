@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32519.111
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF-Learn", "WPF-Learn\WPF-Learn.csproj", "{6D375B46-3BF7-4283-B345-0446C856DBD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureTest", "AzureTest\AzureTest.csproj", "{C3C7F613-47AB-45AE-A926-AF51CFDC9C3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureTest", "AzureTest\AzureTest.csproj", "{C3C7F613-47AB-45AE-A926-AF51CFDC9C3C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVision", "AzureVision\AzureVision.csproj", "{1E9A4676-842B-4999-9DC9-7DC8799CEB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialDesignDemo", "MaterialDesignDemo\MaterialDesignDemo.csproj", "{5435C9D8-28A1-4232-B871-585AB08619CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1E9A4676-842B-4999-9DC9-7DC8799CEB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E9A4676-842B-4999-9DC9-7DC8799CEB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E9A4676-842B-4999-9DC9-7DC8799CEB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5435C9D8-28A1-4232-B871-585AB08619CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5435C9D8-28A1-4232-B871-585AB08619CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5435C9D8-28A1-4232-B871-585AB08619CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5435C9D8-28A1-4232-B871-585AB08619CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

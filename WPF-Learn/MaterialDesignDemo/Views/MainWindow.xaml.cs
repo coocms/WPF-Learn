@@ -13,9 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPF_Learn.Model;
 
-namespace WPF_Learn
+namespace MaterialDesignDemo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -26,7 +25,8 @@ namespace WPF_Learn
         {
             InitializeComponent();
 
-            this.DataContext = new WindowsViewModel();
+
+
         }
     }
 }
