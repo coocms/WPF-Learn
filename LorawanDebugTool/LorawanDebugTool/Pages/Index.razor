@@ -1,0 +1,91 @@
+﻿@page "/"
+@using System.ComponentModel
+@using System.Net.Http.Headers;
+@using Microsoft.Maui.Controls
+@inject IMessageService _message
+
+<Form Model="@model"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      LabelColSpan="2"
+>
+
+    <FormItem>
+        <Input @bind-Value="context.devEUI"/>
+    </FormItem>
+    <FormItem>
+        <Input @bind-Value="context.fPort" />
+    </FormItem>
+    <FormItem>
+        <Input @bind-Value="context.data" />
+    </FormItem>
+    <FormItem>
+        <Checkbox @bind-Value="context.confirmed">confirmed</Checkbox>
+    </FormItem>
+
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+
+
+
+@code
+{
+    public class Model
+    {
+        [DisplayName("FPort")]
+        public string fPort { get; set; }
+        [DisplayName("Confirmed")]
+        public bool confirmed { get; set; }
+        [DisplayName("Data")]
+        public string data { get; set; }
+        [DisplayName("DevUI")]
+        public string devEUI { get; set; }
+    }
+    public class DownLinkDto
+    {
+        public Model deviceQueueItem { get; set; }
+    }
+    public class DownLinkRespose
+    {
+
+        public int fCnt { get; set; }
+    }
+
+    private Model model = new Model();
+
+    private void OnFinish(EditContext editContext)
+    {
+        _message.Info("123456");
+        DownLinkDto downLinkDto = new DownLinkDto
+            {
+                deviceQueueItem = model
+            };
+        var body = Newtonsoft.Json.JsonConvert.SerializeObject(downLinkDto);
+        using HttpClient httpClient = new HttpClient();
+        HttpContent content = new StringContent(body);
+        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5X2lkIjoiMTc5MzBjMjMtMjgzZS00Y2ZlLTkzNDUtMjRjZWI4YmRhZDhmIiwiYXVkIjoiYXMiLCJpc3MiOiJhcyIsIm5iZiI6MTY4MTIxMTI5MCwic3ViIjoiYXBpX2tleSJ9.tngSXyxtHpSGB0RvI1NSRFPZYxUKh3HFi-tor6C1PO0");
+        HttpResponseMessage res = httpClient.PostAsync("http://121.5.35.98:8080/api/devices/037980fffe075362/queue", content).Result;
+        var resStr = res.Content.ReadAsStringAsync().Result;
+        try
+        {
+            var resModel = Newtonsoft.Json.JsonConvert.DeserializeObject<DownLinkRespose>(resStr);
+            //_message.Info("FrameConter = " + resModel.fCnt);
+            
+
+        }
+        catch (Exception ex)
+        {
+            
+        }
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine($"Failed:{Newtonsoft.Json.JsonConvert.SerializeObject(model)}");
+    }
+}

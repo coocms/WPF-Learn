@@ -1,0 +1,126 @@
+﻿@page "/"
+@using System.ComponentModel
+@using System.Net.Http.Headers
+
+
+
+<Form Model="@model"
+      OnFinish="OnFinish"
+      OnFinishFailed="OnFinishFailed"
+      LabelColSpan="2">
+
+    <FormItem>
+        <Input @bind-Value="context.devEUI"/>
+    </FormItem>
+    <FormItem>
+        <Input @bind-Value="context.fPort" />
+    </FormItem>
+    <FormItem>
+        <Input @bind-Value="context.data" />
+    </FormItem>
+    <FormItem>
+        <Checkbox @bind-Value="context.confirmed">confirmed</Checkbox>
+    </FormItem>
+
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+    <Drawer Closable="true" Visible="visible" Placement="right" Title='("Basic Drawer")' OnClose="_=>close()">
+        <p> @resString</p>
+        
+    </Drawer>
+
+@code
+{
+    bool visible = false;
+
+    void open()
+    {
+        this.visible = true;
+    }
+
+    void close()
+    {
+        this.visible = false;
+    }
+    string resString;
+    public class Model
+    {
+        [DisplayName("FPort")]
+        public string fPort { get; set; }
+        [DisplayName("Confirmed")]
+        public bool confirmed { get; set; }
+        [DisplayName("Data")]
+        public string data { get; set; }
+        [DisplayName("DevUI")]
+        public string devEUI { get; set; }
+
+        public Model Clone()
+        {
+            return new Model
+            {
+                    fPort = this.fPort,
+                    confirmed = this.confirmed,
+                    data = this.data,
+                    devEUI = this.devEUI
+            };
+        }
+    }
+    public class DownLinkDto
+    {
+        public Model deviceQueueItem { get; set; }
+    }
+    public class DownLinkRespose
+    {
+
+        public int fCnt { get; set; }
+    }
+
+    private Model model = new Model();
+    byte[] strToToHexByte(string hexString)
+    {
+        hexString = hexString.Replace(" ", "");
+        hexString = hexString.Replace(" ", "");
+
+
+        if ((hexString.Length % 2) != 0)
+            hexString += " ";
+        byte[] returnBytes = new byte[hexString.Length / 2];
+        for (int i = 0; i < returnBytes.Length; i++)
+        {
+
+            returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+
+        }
+
+        return returnBytes;
+    }
+    private void OnFinish(EditContext editContext)
+    {
+        var datas = strToToHexByte(model.data);
+        var _model = model.Clone();
+        _model.data = Convert.ToBase64String(datas);
+        DownLinkDto downLinkDto = new DownLinkDto
+            {
+                deviceQueueItem = _model
+            };
+        var body = Newtonsoft.Json.JsonConvert.SerializeObject(downLinkDto);
+        using HttpClient httpClient = new HttpClient();
+        HttpContent content = new StringContent(body);
+        content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5X2lkIjoiMTc5MzBjMjMtMjgzZS00Y2ZlLTkzNDUtMjRjZWI4YmRhZDhmIiwiYXVkIjoiYXMiLCJpc3MiOiJhcyIsIm5iZiI6MTY4MTIxMTI5MCwic3ViIjoiYXBpX2tleSJ9.tngSXyxtHpSGB0RvI1NSRFPZYxUKh3HFi-tor6C1PO0");
+        HttpResponseMessage res = httpClient.PostAsync($"http://121.5.35.98:8080/api/devices/{_model.devEUI}/queue", content).Result;
+        var resStr = res.Content.ReadAsStringAsync().Result;
+        var resModel = Newtonsoft.Json.JsonConvert.DeserializeObject<DownLinkRespose>(resStr);
+        resString = resStr;
+        open();
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        
+    }
+}
