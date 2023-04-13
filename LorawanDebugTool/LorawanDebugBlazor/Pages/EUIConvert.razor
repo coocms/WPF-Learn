@@ -1,0 +1,127 @@
+﻿@page "/euiconvert"
+
+<PageTitle>EuiConvert</PageTitle>
+
+
+<div>
+    
+    <Input Placeholder="EUI48" @bind-Value="@eui48" DebounceMilliseconds="0" />
+    <br />
+    <br />
+    <Input Placeholder="EUI64" @bind-Value="@eui64" DebounceMilliseconds="0" />
+    <br />
+    <br />
+    
+    <Button Type="@ButtonType.Primary" OnClick="OnConvertClick">Convert</Button>
+
+    @if (bExec)
+    {
+        @if (execRes)
+        {
+            <Alert Type="@AlertType.Success" Message="Success" Closable AfterClose="handleClose" />
+        }
+        else
+        {
+            <Alert Type="@AlertType.Error" Message="Error" Closable AfterClose="handleClose" />
+        }
+        
+    }
+
+    
+    
+</div>
+@code {
+    string eui48 { get; set; }
+    string eui64 { get; set; }
+    bool execRes { get; set; }
+    bool bExec { get; set; }
+    void handleClose()
+    {
+        bExec = false;
+
+    }
+
+
+    void OnConvertClick()
+    {
+        if (string.IsNullOrEmpty(eui48) && string.IsNullOrEmpty(eui64))
+        {
+            bExec = true;
+            execRes = false;
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(eui48))
+        {
+            eui64 = OuiToEui64(eui48);
+
+            bExec = true;
+            if (!string.IsNullOrEmpty(eui64))
+                execRes = true;
+            else
+                execRes = false;
+
+            return;
+        }
+        if (!string.IsNullOrEmpty(eui64))
+        {
+            eui48 = Eui64ToOui(eui64);
+            bExec = true;
+            if (!string.IsNullOrEmpty(eui48))
+                execRes = true;
+            else
+                execRes = false;
+            
+            return;
+        }
+
+
+
+    }
+
+    string OuiToEui64(string oui)
+    {
+        string ouiBytes = oui.Replace("-", string.Empty);
+        if (ouiBytes.Length != 12)
+            return "";
+        string temp = "";
+        temp += ouiBytes.Substring(0, 6);
+        temp += "FFFE";
+        temp += ouiBytes.Substring(6, 6);
+
+        byte[] euiBytes = strToToHexByte(temp);
+
+        // 将 OUI 中的第 7 位取反
+        euiBytes[0] = (byte)(euiBytes[0] ^ 2);
+
+        // 转换成十六进制字符串
+        return BitConverter.ToString(euiBytes);
+    }
+    string Eui64ToOui(string eui64)
+    {
+        var _eui64 = eui64.Replace("-", string.Empty);
+        string temp = _eui64.Substring(0, 6);
+        temp += _eui64.Substring(10, 6);
+        byte[] ouiBytes = strToToHexByte(temp);
+        ouiBytes[0] = (byte)(ouiBytes[0] ^ 2);
+        return BitConverter.ToString(ouiBytes);
+    }
+
+    byte[] strToToHexByte(string hexString)
+    {
+        hexString = hexString.Replace(" ", "");
+        hexString = hexString.Replace(" ", "");
+        if ((hexString.Length % 2) != 0)
+            hexString += " ";
+        byte[] returnBytes = new byte[hexString.Length / 2];
+        for (int i = 0; i < returnBytes.Length; i++)
+        {
+
+            returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+
+        }
+        return returnBytes;
+    }
+}
+
+
