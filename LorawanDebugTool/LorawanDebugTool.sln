@@ -4,7 +4,9 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LorawanDebugTool", "LorawanDebugTool\LorawanDebugTool.csproj", "{BF83FA87-FFE1-4E87-AAEA-ACA26CDAE18F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LorawanDebugBlazor", "LorawanDebugBlazor\LorawanDebugBlazor.csproj", "{985AD2E4-0222-40FB-9A23-093C699272C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LorawanDebugBlazor", "LorawanDebugBlazor\LorawanDebugBlazor.csproj", "{985AD2E4-0222-40FB-9A23-093C699272C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketDemo", "WebSocketDemo\WebSocketDemo.csproj", "{EE2EC658-055E-453C-B4DA-328E658A2CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +24,10 @@ Global
 		{985AD2E4-0222-40FB-9A23-093C699272C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{985AD2E4-0222-40FB-9A23-093C699272C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{985AD2E4-0222-40FB-9A23-093C699272C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
