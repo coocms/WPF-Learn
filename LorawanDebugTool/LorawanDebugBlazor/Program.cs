@@ -1,4 +1,5 @@
 using LorawanDebugBlazor.Data;
+using LorawanDebugBlazor.Service;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -15,6 +16,7 @@ namespace LorawanDebugBlazor
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddSingleton<DeviceUpService>();
 
             var app = builder.Build();
 

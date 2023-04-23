@@ -6,7 +6,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LorawanDebugTool", "Lorawan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LorawanDebugBlazor", "LorawanDebugBlazor\LorawanDebugBlazor.csproj", "{985AD2E4-0222-40FB-9A23-093C699272C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketDemo", "WebSocketDemo\WebSocketDemo.csproj", "{EE2EC658-055E-453C-B4DA-328E658A2CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketDemo", "WebSocketDemo\WebSocketDemo.csproj", "{EE2EC658-055E-453C-B4DA-328E658A2CF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TlsDemo", "TlsDemo\TlsDemo.csproj", "{B05698D7-CDFC-4EA8-9437-20C97144D2C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualSerialTransporter", "VirtualSerialTransporter\VirtualSerialTransporter.csproj", "{43C2A717-CDC1-4133-8668-9C1A365345D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCHC_Fragment", "SCHC_Fragment\SCHC_Fragment.csproj", "{7EF59FC6-376E-42BB-AF73-07479033363B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +34,18 @@ Global
 		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE2EC658-055E-453C-B4DA-328E658A2CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B05698D7-CDFC-4EA8-9437-20C97144D2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05698D7-CDFC-4EA8-9437-20C97144D2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05698D7-CDFC-4EA8-9437-20C97144D2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05698D7-CDFC-4EA8-9437-20C97144D2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C2A717-CDC1-4133-8668-9C1A365345D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C2A717-CDC1-4133-8668-9C1A365345D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C2A717-CDC1-4133-8668-9C1A365345D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C2A717-CDC1-4133-8668-9C1A365345D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF59FC6-376E-42BB-AF73-07479033363B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EF59FC6-376E-42BB-AF73-07479033363B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EF59FC6-376E-42BB-AF73-07479033363B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EF59FC6-376E-42BB-AF73-07479033363B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

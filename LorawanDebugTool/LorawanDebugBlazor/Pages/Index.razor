@@ -1,7 +1,9 @@
 ﻿@page "/"
 @using System.ComponentModel
 @using System.Net.Http.Headers
-
+@using LorawanDebugBlazor.Service;
+@using LorawanDebugBlazor.Model
+@inject DeviceUpService deviceUpService
 
 
 <Form Model="@model"
@@ -22,19 +24,111 @@
         <Checkbox @bind-Value="context.confirmed">confirmed</Checkbox>
     </FormItem>
 
-    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+    <FormItem WrapperColOffset="2" WrapperColSpan="8">
         <Button Type="@ButtonType.Primary" HtmlType="submit">
             Submit
         </Button>
     </FormItem>
+
 </Form>
+
+<Divider Dashed=false />
+<div class="row">
+    <div class="col-auto">
+        <Input width="50" @bind-Value="devUI" />
+    </div>
+    <div class="col-auto">
+        <Button Type="@ButtonType.Primary"
+                OnClick="OnGetDeviceUpDataClick">
+            @GetButtonText
+        </Button>
+    </div>
+    <div class="col-auto">
+        <Button Type="@ButtonType.Primary"
+                OnClick="OnClearClick">
+            Clear
+        </Button>
+    </div>
+</div>
+
+
+
+
     <Drawer Closable="true" Visible="visible" Placement="right" Title='("Basic Drawer")' OnClose="_=>close()">
         <p> @resString</p>
-        
     </Drawer>
-
+<Table TItem="Data"
+       DataSource="@viewDataModel">
+    <PropertyColumn Property="c=>c.DateTime" Format="yyyy/MM/dd HH:mm:ss" Sortable />
+    <PropertyColumn Property="c=>c.Content" Sortable />
+</Table>
 @code
 {
+    string devUI;
+    string GetButtonText = "StartGet";
+    CancellationTokenSource cancellationTokenSource;
+    private async Task OnClearClick()
+    {
+        viewDataModel.Clear();
+        InvokeAsync(() => StateHasChanged());
+    }
+    private async Task OnGetDeviceUpDataClick()
+    {
+        if (cancellationTokenSource == null || cancellationTokenSource.IsCancellationRequested)
+        {
+
+            await InvokeAsync(() => StateHasChanged());
+            cancellationTokenSource = new CancellationTokenSource();
+        }
+        else
+        {
+            cancellationTokenSource.Cancel();
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(devUI))
+        {
+            GetButtonText = "StopGet";
+            await InvokeAsync(() => StateHasChanged());
+            await Task.Run(() =>
+            {
+                var upDatas = deviceUpService.GetDeviceUpData(devUI, cancellationTokenSource.Token);
+                foreach (var data in upDatas)
+                {
+                    var ns_event = Newtonsoft.Json.JsonConvert.DeserializeObject<NS_Event_Model>(data);
+                    if (ns_event?.result.type != "up")
+                        continue;
+                    var payLoadModel = Newtonsoft.Json.JsonConvert.DeserializeObject<PayloadModel>(ns_event.result.payloadJSON);
+                    var dataItem = payLoadModel.data;
+                    var dataItemBytes = Convert.FromBase64String(dataItem);
+                    var dataItemString = Convert.ToHexString(dataItemBytes);
+                    DateTime dateTime = DateTime.ParseExact(ns_event.result.publishedAt.Substring(0, 27), "yyyy-MM-ddTHH:mm:ss.fffffff", null);
+                    viewDataModel.Add(new Data { DateTime = dateTime.ToLocalTime().ToString(), Content = dataItemString });
+                    InvokeAsync(() => StateHasChanged());
+                }
+                cancellationTokenSource = null;
+                GetButtonText = "StartGet";
+                InvokeAsync(() => StateHasChanged());
+            }
+            );
+
+        }
+
+    }
+    public class Data
+    {
+
+        [DisplayName("Time")]
+        public string DateTime { get; set; }
+
+        [DisplayName("Content")]
+        public string Content { get; set; }
+
+    }
+    List<Data> viewDataModel = new List<Data>
+    {
+    };
+
     bool visible = false;
 
     void open()
@@ -50,13 +144,13 @@
     public class Model
     {
         [DisplayName("FPort")]
-        public string fPort { get; set; }
+        public string fPort { get; set; } = "";
         [DisplayName("Confirmed")]
-        public bool confirmed { get; set; }
+        public bool confirmed { get; set; } = true;
         [DisplayName("Data")]
-        public string data { get; set; }
+        public string data { get; set; } = "";
         [DisplayName("DevUI")]
-        public string devEUI { get; set; }
+        public string devEUI { get; set; } = "";
 
         public Model Clone()
         {
@@ -68,6 +162,15 @@
                     devEUI = this.devEUI
             };
         }
+        public bool Check()
+        {
+            if (!string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(devEUI))
+                return true;
+
+            return false;
+
+        }
+
     }
     public class DownLinkDto
     {
@@ -100,6 +203,14 @@
     }
     private void OnFinish(EditContext editContext)
     {
+
+
+
+
+
+        if (!model.Check())
+            return;
+
         var datas = strToToHexByte(model.data);
         var _model = model.Clone();
         _model.data = Convert.ToBase64String(datas);
@@ -117,6 +228,9 @@
         var resModel = Newtonsoft.Json.JsonConvert.DeserializeObject<DownLinkRespose>(resStr);
         resString = resStr;
         open();
+
+
+
     }
 
     private void OnFinishFailed(EditContext editContext)

@@ -19,29 +19,31 @@ namespace WebSocketDemo
     {
         static void Main(string[] args)
         {
-            var webSocket = new ClientWebSocket();
+            //var o = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffffK");
 
-            webSocket.Options.SetRequestHeader("Sec-WebSocket-Extensions", "permessage-deflate; client_max_window_bits");
-
-            var jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5X2lkIjoiMTA1NTU1NTYtZWE5ZC00ZjBlLWE1MzItY2M2MDI5YzAxNWQyIiwiYXVkIjoiYXMiLCJpc3MiOiJhcyIsIm5iZiI6MTY4MTgwMDYyMSwic3ViIjoiYXBpX2tleSJ9.8j0wqhPDnb4_vVkuyGO7-55SeDwjrs9ElTikU-4zIbs";
-
-            webSocket.Options.AddSubProtocol("Bearer");
-            webSocket.Options.AddSubProtocol(jwtToken);
+            //var ll = DateTime.ParseExact("2023-04-20T06:09:07.7719578", "yyyy-MM-ddTHH:mm:ss.fffffff", null);
             
-            webSocket.ConnectAsync(new Uri("ws://121.5.35.98:8080/api/devices/037980fffe075362/events"), CancellationToken.None).Wait();
-            
-            //webSocket.Options.AddSubProtocol
-            while (webSocket.State == WebSocketState.Open)
-            {
+            //var webSocket = new ClientWebSocket();
 
-                var buffer = new ArraySegment<byte>(new byte[1024]);
-                var result = webSocket.ReceiveAsync(buffer, CancellationToken.None).Result;
-                Console.WriteLine(Encoding.UTF8.GetString(buffer.Array, 0, result.Count));
-            }
+            //webSocket.Options.SetRequestHeader("Sec-WebSocket-Extensions", "permessage-deflate; client_max_window_bits");
+
+            //var jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5X2lkIjoiMTA1NTU1NTYtZWE5ZC00ZjBlLWE1MzItY2M2MDI5YzAxNWQyIiwiYXVkIjoiYXMiLCJpc3MiOiJhcyIsIm5iZiI6MTY4MTgwMDYyMSwic3ViIjoiYXBpX2tleSJ9.8j0wqhPDnb4_vVkuyGO7-55SeDwjrs9ElTikU-4zIbs";
+
+            //webSocket.Options.AddSubProtocol("Bearer");
+            //webSocket.Options.AddSubProtocol(jwtToken);
+            
+            //webSocket.ConnectAsync(new Uri("ws://121.5.35.98:8080/api/devices/037980fffe075362/events"), CancellationToken.None).Wait();
+            
+            ////webSocket.Options.AddSubProtocol
+            //while (webSocket.State == WebSocketState.Open)
+            //{
+            //    var buffer = new ArraySegment<byte>(new byte[2048]);
+            //    var result = webSocket.ReceiveAsync(buffer, CancellationToken.None).Result;
+            //    Console.WriteLine(Encoding.UTF8.GetString(buffer.Array, 0, result.Count));
+            //}
 
 
             try
-
             {
 
                 
@@ -59,11 +61,7 @@ namespace WebSocketDemo
 
                //配置服务器IP端口 这里得端口号是可空的
 
-               .WithTcpServer("192.168.31.81", 1885)
-
-               
-
-               ;
+               .WithTcpServer("121.5.35.98", 1883);
                 
                 client.ApplicationMessageReceivedAsync += Client_ApplicationMessageReceivedAsync;
 
@@ -72,8 +70,12 @@ namespace WebSocketDemo
                 //连接
 
                 var c = client.ConnectAsync(build.Build()).Result;
-                var d = client.SubscribeAsync("application/1/device/+/event/up").Result;
+                //var d = client.SubscribeAsync("application/1/device/+/event/up").Result;
 
+                string test = "{}";
+                var bytes = strToToHexByte(test);
+
+                client.PublishAsync(new MqttApplicationMessage() { Topic = "test", Payload = strToToHexByte(test) });
             }
 
             catch (MqttConnectingFailedException)
@@ -98,6 +100,24 @@ namespace WebSocketDemo
             Console.Read();
 
 
+        }
+        public static byte[] strToToHexByte(string hexString)
+        {
+            hexString = hexString.Replace(" ", "");
+            hexString = hexString.Replace(" ", "");
+
+
+            if (hexString.Length % 2 != 0)
+                hexString += " ";
+            byte[] returnBytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < returnBytes.Length; i++)
+            {
+
+                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+
+            }
+
+            return returnBytes;
         }
 
         private static Task Client_ApplicationMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs obj)
