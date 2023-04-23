@@ -90,6 +90,17 @@
         {
             GetButtonText = "StopGet";
             await InvokeAsync(() => StateHasChanged());
+
+            Task.Run(() =>
+            {
+                while(true)
+                {
+                    Thread.Sleep(5000);
+                    var res = deviceUpService.GetPackageData();
+
+                }
+            });
+
             await Task.Run(() =>
             {
                 var upDatas = deviceUpService.GetDeviceUpData(devUI, cancellationTokenSource.Token);

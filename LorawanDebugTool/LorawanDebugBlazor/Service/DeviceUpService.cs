@@ -1,4 +1,5 @@
-﻿using System.Net.WebSockets;
+﻿using LorawanDebugBlazor.Tool;
+using System.Net.WebSockets;
 using System.Text;
 
 namespace LorawanDebugBlazor.Service
@@ -11,6 +12,7 @@ namespace LorawanDebugBlazor.Service
         {
             _configuration = configuration;
             addr = _configuration.GetValue<string>("NSAddr");
+            SCHCWrapper.SCHCCompress("");
         }
 
         public IEnumerable<string> GetDeviceUpData(string devUI, CancellationToken cancellationToken)
@@ -54,10 +56,32 @@ namespace LorawanDebugBlazor.Service
 
                     break;
                 }
+                if (res.StartsWith("02"))
+                {
+                    var msg = DataConvert.strToToHexByte(res);
+                    SCHCWrapper.SendData(msg, msg.Length, 1);
+                    continue;
+                }
                 
                 
                 yield return res;
             }
+
+        }
+
+        public string GetPackageData()
+        {
+            byte[] resData = new byte[1024];
+            int len = 0;
+            SCHCWrapper.Pop(ref resData[0], ref len);
+            if (len == 0)
+                return string.Empty;
+
+            var res = DataConvert.byteToHexStr(resData);
+            res = res.Substring(0, len * 2);
+
+            var originalData = SCHCWrapper.SCHCDecompress(res);
+            return originalData;
 
         }
     }
